@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list App</title>
+</head>
+<body>
+    <ul id="doList">
+    </ul>
+
+    <form class="doForm">
+        <label for="inputField">to-do</label>
+        <input type="text" id="inputField"  required>
+        <button type="submit" id="submitButton">submit to-do</button>
+    </form>
+
+    <script>
+        const button = document.getElementById("submitButton");
+        button.addEventListener('click', addTodo);
+
+        function addTodo(e){
+            e.preventDefault();
+            const inputField = document.getElementById('inputField');
+            const value = inputField.value;
+            inputField.value = '';
+            let node = document.createElement('li');
+            let editButton = document.createElement('button');
+            node.appendChild(document.createTextNode(value));
+            addDelButton(node);
+            document.getElementById('doList').appendChild(node);
+        }
+
+        function addDelButton(parent){
+            var delButton = parent.appendChild(document.createElement("button"));
+            delButton.innerHTML = "Delete";
+            delButton.onclick = function() {
+                this.parentElement.remove();
+            }
+        }
+    </script>
+
+</body>
+</html>
